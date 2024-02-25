@@ -1,0 +1,27 @@
+# docker-compose.yml
+
+version: '3.7'
+
+services:
+  sqlite3:
+    image: nouchka/sqlite3:latest
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./db/:/root/db/
+
+  api:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    command: python src/main.py
+    container_name: api
+    volumes:
+      - ../:/api
+      - ./db/:/my/sqlite/path/
+    ports:
+      - 8008:8008
+    environment:
+      - DATABASE_URL=sqlite:////my/sqlite/path/
+    depends_on:
+      - sqlite3
