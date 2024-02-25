@@ -4,7 +4,7 @@
 FROM python:3.11.0-slim
 
 # set work directory
-WORKDIR /src
+WORKDIR /
 
 
 # install dependencies
@@ -14,3 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # copy project
 COPY . .
+ENV PYTHONPATH=/src
+ENV DATABASE_URL=sqlite:////my/sqlite/path/

@@ -12,7 +12,6 @@ services:
 
   api:
     build:
-      context: ../
       dockerfile: Dockerfile
     command: python src/main.py
     container_name: api
