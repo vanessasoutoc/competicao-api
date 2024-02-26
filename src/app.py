@@ -1,11 +1,14 @@
 from fastapi import FastAPI, APIRouter
 from contextlib import asynccontextmanager
 from fastapi.middleware.cors import CORSMiddleware
+from database import engine, Base
 from v1.competicoes.router import router as v1_competicoes_router
 
 origins = [
     '*'
 ]
+
+Base.metadata.create_all(bind=engine)
 
 route = APIRouter(prefix='/api')
 
