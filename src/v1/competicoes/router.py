@@ -12,7 +12,6 @@ def create(request: CompeticaoRequest, db: Session = Depends(get_db)):
     competicao = CompeticaoRepository.save(db, Competicao(**request.dict()))
     return CompeticaoResponse.from_orm(competicao)
 
-
 @router.get(
     path='',
     description='Lista de competições',
