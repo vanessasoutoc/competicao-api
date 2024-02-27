@@ -28,4 +28,4 @@ Documentação [http://localhost:8008/docs](http://localhost:8008/docs)
 
 Rode os testes unitários com docker, utilizando o comando abaixo:
 
-`$ docker-compose up -d && docker-compose exec ./ pytest --cov=src .`
+`$ docker-compose up -d && docker-compose exec api pytest --cov=src src`
