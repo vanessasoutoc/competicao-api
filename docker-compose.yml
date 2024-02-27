@@ -12,5 +12,3 @@ services:
       - ../:/api
     ports:
       - 8008:8008
-    environment:
-      - DATABASE_URL=competicoes.db

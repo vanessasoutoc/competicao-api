@@ -2,9 +2,10 @@ from sqlalchemy.orm import Session
 
 from .model import Competicao
 
+
 class CompeticaoRepository:
     @staticmethod
-    def find_all(db: Session) -> list[Competicao]:
+    def list_all(db: Session) -> list[Competicao]:
         return db.query(Competicao).all()
 
     @staticmethod
@@ -15,18 +16,3 @@ class CompeticaoRepository:
             db.add(competicao)
         db.commit()
         return competicao
-
-    @staticmethod
-    def find_by_id(db: Session, id: int) -> Competicao:
-        return db.query(Competicao).filter(Competicao.id == id).first()
-
-    @staticmethod
-    def exists_by_id(db: Session, id: int) -> bool:
-        return db.query(Competicao).filter(Competicao.id == id).first() is not None
-
-    @staticmethod
-    def delete_by_id(db: Session, id: int) -> None:
-        competicao = db.query(Competicao).filter(Competicao.id == id).first()
-        if competicao is not None:
-            db.delete(competicao)
-            db.commit()

@@ -1,6 +1,6 @@
+from database import Base
 from sqlalchemy import Column, Integer, String, DateTime
 
-from database import Base
 
 class Competicao(Base):
     __tablename__ = "competicoes"

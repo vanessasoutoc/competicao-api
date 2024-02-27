@@ -1,8 +1,11 @@
-from fastapi import FastAPI, APIRouter
 from contextlib import asynccontextmanager
+
+from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
+
 from database import engine, Base
 from v1.competicoes.router import router as v1_competicoes_router
+from v1.pontuacoes.router import router as v1_pontuacoes_router
 
 origins = [
     '*'
@@ -33,4 +36,5 @@ app.add_middleware(
 )
 
 route.include_router(v1_competicoes_router, prefix='/v1')
+route.include_router(v1_pontuacoes_router, prefix='/v1')
 app.include_router(route)

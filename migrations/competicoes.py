@@ -1,26 +1,31 @@
 
 import sqlite3
 
-# Connecting to sqlite
-# connection object
+# Abre a conexão
 connection_obj = sqlite3.connect('competicoes.db')
 
-# cursor object
-cursor_obj = connection_obj.cursor()
+connection = connection_obj.cursor()
 
-# Drop the GEEK table if already exists.
-cursor_obj.execute("DROP TABLE IF EXISTS COMPETICOES")
+connection.execute("DROP TABLE IF EXISTS COMPETICOES")
 
-# Creating table
-table = """CREATE TABLE competicoes (
+competicoes_table = """CREATE TABLE competicoes (
             id INTEGER PRIMARY KEY,
             titulo VARCHAR(99) NOT NULL,
-            data_fim TEXT
+            data_fim TEXT NULL
         )"""
 
-cursor_obj.execute(table)
+pontuacoes_table = """CREATE TABLE pontuacoes (
+            id INTEGER PRIMARY KEY,
+            competicao_id INTEGER NOT NULL,
+            atleta VARCHAR(99) NOT NULL,
+            valor DECIMAL(2,3) NOT NULL,
+            unidade VARCHAR(1) NOT NULL
+        )"""
 
-print("Table is Ready")
+connection.execute(competicoes_table)
+connection.execute(pontuacoes_table)
 
-# Close the connection
+print("Tabelas criadas com sucesso.")
+
+# Fecha a conexão
 connection_obj.close()
