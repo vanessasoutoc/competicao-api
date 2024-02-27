@@ -37,6 +37,8 @@ Acesse a pasta do projeto e execute o comando abaixo:
 
 ### Testes unitários
 
+Acesse [GitActions](https://github.com/vanessasoutoc/competicao-api/actions)
+
 Rode os testes unitários com docker, utilizando o comando abaixo:
 
 `$ docker-compose up -d && docker-compose exec api pytest --cov=src src`
