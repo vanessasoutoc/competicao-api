@@ -25,3 +25,12 @@ def create(request: CompeticaoRequest, db: Session = Depends(get_db)):
 def list_all(db: Session = Depends(get_db)):
     competicoes = CompeticaoRepository.list_all(db)
     return [CompeticaoResponse.from_orm(competicao) for competicao in competicoes]
+
+@router.patch(
+    path="/{id}/finaliza",
+    description='Finaliza a competição',
+    response_model=CompeticaoResponse,
+    status_code=status.HTTP_200_OK)
+def finaliza(id, db: Session = Depends(get_db)):
+    competicao = CompeticaoRepository.finaliza(db, id)
+    return CompeticaoResponse.from_orm(competicao)

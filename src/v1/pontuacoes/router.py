@@ -1,5 +1,5 @@
 from database import get_db
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 
 from .model import Pontuacao
@@ -14,9 +14,12 @@ router = APIRouter(prefix='/pontuacoes')
     response_model=PontuacaoResponse,
     status_code=status.HTTP_201_CREATED
 )
-def create(request: PontuacaoRequest, db: Session = Depends(get_db)):
-    pontuacao = PontuacaoRepository.save(db, Pontuacao(**request.dict()))
-    return PontuacaoResponse.from_orm(pontuacao)
+def save(request: PontuacaoRequest, db: Session = Depends(get_db)):
+    try:
+        pontuacao = PontuacaoRepository.save(db, Pontuacao(**request.dict()))
+        return PontuacaoResponse.from_orm(pontuacao)
+    except Exception as error:
+        raise HTTPException(status_code=404, detail=str('Error %s' % (error)))
 
 @router.get(
     path='',
