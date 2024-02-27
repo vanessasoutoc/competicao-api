@@ -7,9 +7,9 @@ services:
     build:
       dockerfile: Dockerfile
     command: python src/main.py
-    container_name: api
+    container_name: competicoes
     volumes:
-      - ../:/api
+      - ../:/competicoes
     ports:
       - 8008:8008
 
