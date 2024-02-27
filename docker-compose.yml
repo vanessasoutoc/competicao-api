@@ -9,7 +9,7 @@ services:
     command: python src/main.py
     container_name: competicoes
     volumes:
-      - ../:/competicoes
+      - ./competicoes:/competicoes
     ports:
       - 8008:8008
 
