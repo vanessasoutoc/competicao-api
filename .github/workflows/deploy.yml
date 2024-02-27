@@ -36,4 +36,4 @@ jobs:
         port: 22
         script: |
           cd /docker-images/competicoes && \
-          docker-compose up --build -d
+          docker-compose build && \ docker-compose up -d
