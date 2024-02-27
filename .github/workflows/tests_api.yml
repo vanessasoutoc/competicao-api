@@ -1,0 +1,32 @@
+name: Tests api
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test_api:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r api/requirements.txt; fi
+      - name: Unit Testing with pytest
+        env:
+          PYTHONPATH: /
+          MONGO_DB: mongodb://creditcard:creditcard@localhost:27017
+        run: |
+          pip install pytest
+          pytest --cov=src .
