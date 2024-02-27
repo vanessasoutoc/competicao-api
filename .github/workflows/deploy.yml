@@ -1,0 +1,39 @@
+name: DEPLOY
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@v0.1.4
+      with:
+        remote_path: /docker-images/credit-card
+        host: ${{secrets.SSH_HOST}}
+        username: naclick
+        port: 22
+        password: ${{ secrets.REMOTE_KEY_PASS }}
+        source: "*"
+        target: /docker-images/credit-card
+        overwrite: true
+
+  build:
+    name: Build
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Run Docker CMD
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.REMOTE_KEY_PASS }}
+        port: 22
+        script: |
+          cd /docker-images/credit-card && \
+          docker-compose up --build -d
