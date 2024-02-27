@@ -19,7 +19,7 @@ jobs:
         port: 22
         password: ${{ secrets.REMOTE_KEY_PASS }}
         source: "*"
-        target: /docker-images/credit-card
+        target: /docker-images/competicoes
         overwrite: true
 
   build:
