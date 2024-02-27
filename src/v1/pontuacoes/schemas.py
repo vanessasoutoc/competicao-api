@@ -2,7 +2,6 @@ from pydantic import BaseModel
 
 from ..competicoes.schemas import CompeticaoResponse
 
-
 class PontuacaoBase(BaseModel):
     competicao_id: int
     atleta: str

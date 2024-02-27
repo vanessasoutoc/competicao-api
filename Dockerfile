@@ -15,4 +15,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 # copy project
 COPY . .
 ENV PYTHONPATH=/src
-ENV DATABASE_URL=sqlite:///../competicoes.db
+ENV DATABASE_URL=sqlite:///competicoes.db

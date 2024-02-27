@@ -34,3 +34,11 @@ def list_all(db: Session = Depends(get_db)):
 def finaliza(id, db: Session = Depends(get_db)):
     competicao = CompeticaoRepository.finaliza(db, id)
     return CompeticaoResponse.from_orm(competicao)
+
+@router.get(
+    path="/{id}/ranking",
+    description='Ranking da competição',
+    status_code=status.HTTP_200_OK)
+def ranking(id, db: Session = Depends(get_db)):
+    competicao = CompeticaoRepository.ranking(db, id)
+    return competicao

@@ -6,7 +6,8 @@ connection_obj = sqlite3.connect('competicoes.db')
 
 connection = connection_obj.cursor()
 
-connection.execute("DROP TABLE IF EXISTS COMPETICOES")
+connection.execute("DROP TABLE IF EXISTS competicoes")
+connection.execute("DROP TABLE IF EXISTS pontuacoes")
 
 competicoes_table = """CREATE TABLE competicoes (
             id INTEGER PRIMARY KEY,
@@ -19,7 +20,8 @@ pontuacoes_table = """CREATE TABLE pontuacoes (
             competicao_id INTEGER NOT NULL,
             atleta VARCHAR(99) NOT NULL,
             valor DECIMAL(2,3) NOT NULL,
-            unidade VARCHAR(1) NOT NULL
+            unidade VARCHAR(1) NOT NULL,
+            FOREIGN KEY(competicao_id) REFERENCES competicoes(id)
         )"""
 
 connection.execute(competicoes_table)
