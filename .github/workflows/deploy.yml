@@ -13,9 +13,9 @@ jobs:
     - name: copy file via ssh password
       uses: appleboy/scp-action@v0.1.4
       with:
-        remote_path: /docker-images/credit-card
+        remote_path: /docker-images/competicoes
         host: ${{secrets.SSH_HOST}}
-        username: naclick
+        username: ${{ secrets.USERNAME }}
         port: 22
         password: ${{ secrets.REMOTE_KEY_PASS }}
         source: "*"
