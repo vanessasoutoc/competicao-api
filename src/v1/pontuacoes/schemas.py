@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 
-from ..competicoes.schemas import CompeticaoResponse
+from v1.competicoes.schemas import CompeticaoResponse
 
 class PontuacaoBase(BaseModel):
     competicao_id: int

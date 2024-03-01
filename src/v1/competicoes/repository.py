@@ -1,6 +1,5 @@
 from datetime import datetime
 from sqlalchemy.orm import Session
-from v1.pontuacoes.model import Pontuacao
 
 from .model import Competicao
 

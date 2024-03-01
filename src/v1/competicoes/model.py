@@ -1,8 +1,8 @@
-from database import Base
-from datetime import datetime
 from sqlalchemy.orm import relationship
 from sqlalchemy import Column, Integer, String, DateTime
 
+from database import Base
+from datetime import datetime
 
 class Competicao(Base):
     __tablename__ = "competicoes"
