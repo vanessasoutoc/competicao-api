@@ -41,4 +41,5 @@ def finaliza(id, db: Session = Depends(get_db)):
     status_code=status.HTTP_200_OK)
 def ranking(id, db: Session = Depends(get_db)):
     competicao = CompeticaoRepository.ranking(db, id)
+    competicao.pontuacoes = competicao.pontuacoes
     return competicao

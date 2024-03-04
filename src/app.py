@@ -3,15 +3,12 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 
-# from src.database import engine, Base
 from v1.competicoes.router import router as v1_competicoes_router
 from v1.pontuacoes.router import router as v1_pontuacoes_router
 
 origins = [
     '*'
 ]
-
-#Base.metadata.create_all(bind=engine)
 
 route = APIRouter(prefix='/api')
 
