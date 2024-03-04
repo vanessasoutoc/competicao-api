@@ -27,7 +27,7 @@ def list_all(db: Session = Depends(get_db)):
     return [CompeticaoResponse.from_orm(competicao) for competicao in competicoes]
 
 @router.patch(
-    path="/{id}/finaliza",
+    path='/{id}/finaliza',
     description='Finaliza a competição',
     response_model=CompeticaoResponse,
     status_code=status.HTTP_200_OK)
@@ -36,7 +36,7 @@ def finaliza(id, db: Session = Depends(get_db)):
     return CompeticaoResponse.from_orm(competicao)
 
 @router.get(
-    path="/{id}/ranking",
+    path='/{id}/ranking',
     description='Ranking da competição',
     status_code=status.HTTP_200_OK)
 def ranking(id, db: Session = Depends(get_db)):

@@ -7,7 +7,7 @@ from database import Base
 
 
 class Competicao(Base):
-    __tablename__ = "competicoes"
+    __tablename__ = 'competicoes'
 
     id: int = Column(Integer, primary_key=True, index=True)
     titulo: str = Column(String(100), nullable=True)
