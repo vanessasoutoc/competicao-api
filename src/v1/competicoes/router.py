@@ -4,7 +4,8 @@ from sqlalchemy.orm import Session
 from database import get_db
 from .model import Competicao
 from .repository import CompeticaoRepository
-from .schemas import CompeticaoResponse, CompeticaoRequest
+from .schemas.competicao import CompeticaoResponse, CompeticaoRequest
+from .schemas.competicao_pontuacoes import CompeticaoPontuacoesResponse
 
 router = APIRouter(prefix='/competicoes')
 
@@ -29,7 +30,7 @@ def list_all(db: Session = Depends(get_db)):
 @router.patch(
     path='/{id}/finaliza',
     description='Finaliza a competição',
-    response_model=CompeticaoResponse,
+    response_model=list[CompeticaoResponse],
     status_code=status.HTTP_200_OK)
 def finaliza(id, db: Session = Depends(get_db)):
     competicao = CompeticaoRepository.finaliza(db, id)
@@ -38,8 +39,8 @@ def finaliza(id, db: Session = Depends(get_db)):
 @router.get(
     path='/{id}/ranking',
     description='Ranking da competição',
+    response_model=CompeticaoPontuacoesResponse,
     status_code=status.HTTP_200_OK)
 def ranking(id, db: Session = Depends(get_db)):
     competicao = CompeticaoRepository.ranking(db, id)
-    competicao.pontuacoes = competicao.pontuacoes
-    return competicao
+    return CompeticaoPontuacoesResponse.from_orm(competicao)

@@ -2,8 +2,6 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional
 
-# from ..pontuacoes.schemas import PontuacaoBase as Pontuacao
-
 
 class CompeticaoBase(BaseModel):
     titulo: str
@@ -19,3 +17,5 @@ class CompeticaoResponse(CompeticaoBase):
 
     class Config:
         from_attributes = True
+
+

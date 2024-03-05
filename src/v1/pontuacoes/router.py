@@ -4,7 +4,8 @@ from sqlalchemy.orm import Session
 from database import get_db
 from .model import Pontuacao
 from .repository import PontuacaoRepository
-from .schemas import PontuacaoResponse, PontuacaoRequest
+from .schemas.pontuacao import PontuacaoResponse, PontuacaoRequest
+from .schemas.pontuacao_competicao import PontuacaoCompeticaoResponse
 
 router = APIRouter(prefix='/pontuacoes')
 
@@ -24,8 +25,8 @@ def save(request: PontuacaoRequest, db: Session = Depends(get_db)):
 @router.get(
     path='',
     description='Lista de competições',
-    response_model=list[PontuacaoResponse]
+    response_model=list[PontuacaoCompeticaoResponse]
     )
 def find_all(db: Session = Depends(get_db)):
     pontuacoes = PontuacaoRepository.list_all(db)
-    return [PontuacaoResponse.from_orm(pontuacao) for pontuacao in pontuacoes]
+    return [PontuacaoCompeticaoResponse.from_orm(pontuacao) for pontuacao in pontuacoes]
