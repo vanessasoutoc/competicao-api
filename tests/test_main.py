@@ -26,13 +26,6 @@ def test_success_competicoes_post():
     assert response.json()["titulo"] == "Corrida 200 m"
 
 
-def test_success_competicoes_finaliza():
-    id = 1
-    response = client.patch(
-        f'/api/v1/competicoes/{id}/finaliza'
-    )
-    assert response.status_code == 200
-
 def test_success_pontuacoes_list_all():
     response = client.get("/api/v1/pontuacoes")
     assert response.status_code == 200
@@ -79,16 +72,25 @@ def test_success_pontuacoes_post():
     assert response.json()["atleta"] == "Marta Souza"
 
 def test_success_pontuacoes_update():
-    data = {
-        "id":2,
-        "competicao_id": 2,
-        "atleta": "Marta Souza",
-        "valor": 20.567,
-        "unidade": "s"
-    }
+    pontuacoes_response = client.get("/api/v1/pontuacoes")
+    pontuacoes = json.loads(json.dumps(pontuacoes_response.json()))
+    pontuacao = pontuacoes[len(pontuacoes) - 1]
+    pontuacao['valor'] = 20.567
     response = client.post(
         "/api/v1/pontuacoes",
-        json=data
+        json=pontuacao
     )
     assert response.status_code == 201
-    assert response.json()["atleta"] == "Marta Souza"
+    assert response.json()["valor"] == 20.567
+
+def test_success_competicoes_finaliza():
+    data = {"titulo": "Corrida 400 m"}
+    new_competicao = client.post(
+        "/api/v1/competicoes",
+        json=data
+    )
+    id = int(json.loads(json.dumps(new_competicao.json()))['id'])
+    response = client.patch(
+        f'/api/v1/competicoes/{id}/finaliza'
+    )
+    assert response.status_code == 200

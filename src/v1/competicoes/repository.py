@@ -20,10 +20,13 @@ class CompeticaoRepository:
     @staticmethod
     def finaliza(db: Session, id: int) -> Competicao:
         competicao = db.query(Competicao).filter(Competicao.id == id).first()
-        competicao.data_fim = datetime.now()
-        db.merge(competicao)
-        db.commit()
+        if(competicao.data_fim == None):
+            competicao.data_fim = datetime.now()
+            db.merge(competicao)
+            db.commit()
+
         return competicao
+
 
     @staticmethod
     def ranking(db: Session, id: int) -> Competicao:

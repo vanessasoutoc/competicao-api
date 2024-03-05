@@ -30,7 +30,7 @@ def list_all(db: Session = Depends(get_db)):
 @router.patch(
     path='/{id}/finaliza',
     description='Finaliza a competição',
-    response_model=list[CompeticaoResponse],
+    response_model=CompeticaoResponse,
     status_code=status.HTTP_200_OK)
 def finaliza(id, db: Session = Depends(get_db)):
     competicao = CompeticaoRepository.finaliza(db, id)

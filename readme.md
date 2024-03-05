@@ -42,3 +42,12 @@ Acesse [GitActions](https://github.com/vanessasoutoc/competicao-api/actions)
 Rode os testes unitários com docker, utilizando o comando abaixo:
 
 `$ docker-compose up -d && docker-compose exec competicoes pytest --cov=src src`
+
+
+### Banco de Dados
+
+- SQLITE
+
+Para limpar o banco de dados basta rodar o comando:
+
+`$ python migrations/competicoes.py`
